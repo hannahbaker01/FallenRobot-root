@@ -1,51 +1,45 @@
+import os
+
 class Config(object):
-    LOGGER = True
+    LOGGER = bool(os.environ.get("LOGGER", True))
 
-    # Get this value from my.telegram.org/apps
-    API_ID = 6
-    API_HASH = "eb06d4abfb49dc3eeb1aeb98ae0f581e"
+    API_ID = int(os.environ.get("API_ID", 6))
+    API_HASH = os.environ.get("API_HASH", "eb06d4abfb49dc3eeb1aeb98ae0f581e")
+    
+    CASH_API_KEY = os.environ.get("CASH_API_KEY", "")
+    DATABASE_URL = os.environ.get("DATABASE_URL", "")
+    EVENT_LOGS = os.environ.get("EVENT_LOGS", ())
+    MONGO_DB_URI = os.environ.get("MONGO_DB_URI", "")
+    
+    START_IMG = os.environ.get("START_IMG", "https://te.legra.ph/file/40eb1ed850cdea274693e.jpg")
+    
+    SUPPORT_CHAT = os.environ.get("SUPPORT_CHAT", "DevilsHeavenMF")
+    TOKEN = os.environ.get("TOKEN", "")
+    TIME_API_KEY = os.environ.get("TIME_API_KEY", "")
+    
+    OWNER_ID = int(os.environ.get("OWNER_ID", 1356469075))
 
-    CASH_API_KEY = ""  # Get this value for currency converter from https://www.alphavantage.co/support/#api-key
+    # For lists, assuming comma-separated values in the environment variable
+    BL_CHATS = os.environ.get("BL_CHATS", "").split(',')
+    DRAGONS = os.environ.get("DRAGONS", "").split(',')
+    DEV_USERS = os.environ.get("DEV_USERS", "").split(',')
+    DEMONS = os.environ.get("DEMONS", "").split(',')
+    TIGERS = os.environ.get("TIGERS", "").split(',')
+    WOLVES = os.environ.get("WOLVES", "").split(',')
 
-    DATABASE_URL = ""  # A sql database url from elephantsql.com
-
-    EVENT_LOGS = ()  # Event logs channel to note down important bot level events
-
-    MONGO_DB_URI = ""  # Get ths value from cloud.mongodb.com
-
-    # Telegraph link of the image which will be shown at start command.
-    START_IMG = "https://te.legra.ph/file/40eb1ed850cdea274693e.jpg"
-
-    SUPPORT_CHAT = "DevilsHeavenMF"  # Your Telegram support group chat username where your users will go and bother you
-
-    TOKEN = ""  # Get bot token from @BotFather on Telegram
-
-    TIME_API_KEY = ""  # Get this value from https://timezonedb.com/api
-
-    OWNER_ID = 1356469075  # User id of your telegram account (Must be integer)
-
-    # Optional fields
-    BL_CHATS = []  # List of groups that you want blacklisted.
-    DRAGONS = []  # User id of sudo users
-    DEV_USERS = []  # User id of dev users
-    DEMONS = []  # User id of support users
-    TIGERS = []  # User id of tiger users
-    WOLVES = []  # User id of whitelist users
-
-    ALLOW_CHATS = True
-    ALLOW_EXCL = True
-    DEL_CMDS = True
-    INFOPIC = True
-    LOAD = []
-    NO_LOAD = []
-    STRICT_GBAN = True
-    TEMP_DOWNLOAD_DIRECTORY = "./"
-    WORKERS = 8
-
+    ALLOW_CHATS = bool(os.environ.get("ALLOW_CHATS", True))
+    ALLOW_EXCL = bool(os.environ.get("ALLOW_EXCL", True))
+    DEL_CMDS = bool(os.environ.get("DEL_CMDS", True))
+    INFOPIC = bool(os.environ.get("INFOPIC", True))
+    LOAD = os.environ.get("LOAD", "").split(',')
+    NO_LOAD = os.environ.get("NO_LOAD", "").split(',')
+    STRICT_GBAN = bool(os.environ.get("STRICT_GBAN", True))
+    TEMP_DOWNLOAD_DIRECTORY = os.environ.get("TEMP_DOWNLOAD_DIRECTORY", "./")
+    WORKERS = int(os.environ.get("WORKERS", 8))
 
 class Production(Config):
-    LOGGER = True
-
+    LOGGER = bool(os.environ.get("PRODUCTION_LOGGER", True))
 
 class Development(Config):
-    LOGGER = True
+    LOGGER = bool(os.environ.get("DEVELOPMENT_LOGGER", True))
+
